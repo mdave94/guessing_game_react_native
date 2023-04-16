@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 24,
     borderRadius: 8,
     backgroundColor: "#3b021f",
-    elevation: 4, //only on android
+    elevation: 4, //only in android
     shadowColor: "black",
     shadowOffset: { width: 0, height: 2 },
     shadowRadius: 8,
