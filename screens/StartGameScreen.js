@@ -2,7 +2,7 @@ import { useState } from "react";
 import { View, StyleSheet, TextInput, Alert } from "react-native";
 import PrimaryButton from "../components/PrimaryButton";
 
-function StartGameScreen() {
+function StartGameScreen({onPickNumber}) {
   const [inputNumber, setInputNumber] = useState("");
 
   function resetNumber() {
@@ -20,10 +20,12 @@ function StartGameScreen() {
 
     if (isNaN(chosenNumber) || chosenNumber <= 0 || chosenNumber > 99) {
       Alert.alert("Error", "you need to chose number between 1 - 99 ! ",
-        [{ text: "Okay", style: "destructive", onPress: resetNumber }])
-
-      
+        [{ text: "Okay", style: "destructive", onPress: resetNumber }]) 
+        return;
     }
+
+    onPickNumber(chosenNumber)
+
   }
 
   return (
