@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Text, View, StyleSheet } from "react-native";
+import { Text, View, StyleSheet, Alert } from "react-native";
 import NumberContainer from "../components/game/NumberContainer";
 import PrimaryButton from "../components/ui/PrimaryButton";
 import Title from "../components/ui/Title";
@@ -7,13 +7,12 @@ import Colors from "../constants/colors";
 
 function generateRandomNumberBetween(min, max, exclude) {
   const randomNumber = Math.floor(Math.random() * (max - min)) + min;
-  
+
   if (randomNumber === exclude) {
     return generateRandomNumberBetween(min, max, exclude);
   } else {
     return randomNumber;
   }
-
 }
 
 let minNumber = 1;
@@ -25,10 +24,19 @@ function GameScreen({ userNumber }) {
   const firstGuess = generateRandomNumberBetween(1, 100, userNumber);
   const [currentGuess, setCurrentGuess] = useState(firstGuess);
 
-
-    //direction can be 'lower' or 'greater' for guessing
+  //direction can be 'lower' or 'greater' for guessing
   function nextGuessHandler(direction) {
-
+    if (
+      (direction === "lower" && currentGuess < userNumber) ||
+      (direction === "greater" && currentGuess > userNumber)
+    ) {
+      Alert.alert(
+        "You've gave wrong answer !",
+        "You should give a new aswer",
+        [{ text: "Whoops", style: "cancel" }]
+      );
+      return;
+    }
 
     if (direction === "lower") {
       maxNumber = currentGuess;
@@ -53,8 +61,16 @@ function GameScreen({ userNumber }) {
       <View>
         <Text>Higher or lower</Text>
         <View style={styles.buttonsContainer}>
-          <PrimaryButton onPressHandler={nextGuessHandler.bind(this,'greater')}> + </PrimaryButton>
-          <PrimaryButton onPressHandler={nextGuessHandler.bind(this,'lower')}> - </PrimaryButton>
+          <PrimaryButton
+            onPressHandler={nextGuessHandler.bind(this, "greater")}
+          >
+            {" "}
+            +{" "}
+          </PrimaryButton>
+          <PrimaryButton onPressHandler={nextGuessHandler.bind(this, "lower")}>
+            {" "}
+            -{" "}
+          </PrimaryButton>
         </View>
       </View>
       {/* <View>Log rounds</View> */}
