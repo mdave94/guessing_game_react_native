@@ -1,16 +1,9 @@
-import { TextInput,View} from 'react-native'
+import {Text} from 'react-native'
 
-function StartGameScreen(){
-
-    return(
-        <>
-        <View>
-            <TextInput/>
-            BUTTONS
-        </View>
-        </>
+function GamveOverScreen() {
+    return (
+        <Text>GAME OVER </Text>
     )
+}
 
-}   
-
-export default StartGameScreen;
+export default GamveOverScreen;
