@@ -4,10 +4,22 @@ import { LinearGradient } from "expo-linear-gradient";
 import { useState } from "react";
 import GameScreen from "./screens/GameScreen";
 import GameOverScreen from "./screens/GameOverScreen";
+import {useFonts  } from 'expo-font';
+import Apploading from 'expo-app-loading';
 
 export default function App() {
   const [userNumber, setUserNumber] = useState();
   const [gameOver, setGamveOver] = useState(false);
+
+  //the first element of this returned array is a boolean , eithet are loaded the fonts or not
+  const [fontsLoaded]=useFonts({
+    'open-sans-bold': require('./assets/fonts/OpenSans-Bold.ttf'),
+    'open-sans': require('./assets/fonts/OpenSans-Regular.ttf'),
+  })
+  
+  if(!fontsLoaded){
+    return <Apploading/>
+  }
 
   function startGameHandler(pickedNumber) {
     setUserNumber(pickedNumber);
