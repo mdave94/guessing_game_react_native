@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Text, View, StyleSheet, Alert } from "react-native";
+import { Text, View, StyleSheet, Alert, TextComponent } from "react-native";
 import NumberContainer from "../components/game/NumberContainer";
 import Card from "../components/ui/Card";
 import InstuctionText from "../components/ui/InstructionText";
@@ -12,6 +12,9 @@ import {Ionicons} from "@expo/vector-icons";
 function generateRandomNumberBetween(min, max, exclude) {
   const randomNumber = Math.floor(Math.random() * (max - min)) + min;
 
+
+
+
   if (randomNumber === exclude) {
     return generateRandomNumberBetween(min, max, exclude);
   } else {
@@ -19,23 +22,34 @@ function generateRandomNumberBetween(min, max, exclude) {
   }
 }
 
-let minNumber = 1;
-let maxNumber = 100;
+function GameScreen({ userNumber, onGameOver,}) {
 
-function GameScreen({ userNumber, onGameOver }) {
+
+
   // we need access to chosenNumber
 
+  
   const firstGuess = generateRandomNumberBetween(1, 100, userNumber);
   const [currentGuess, setCurrentGuess] = useState(firstGuess);
+  const [guessRounds,setGuessRounds] = useState([firstGuess])
+
 
   useEffect(() => {
+    console.log(userNumber,currentGuess)
     if (currentGuess === userNumber) {
       onGameOver();
     }
   }, [currentGuess, userNumber, onGameOver]);
 
+  useEffect(()=>{
+    minNumber=1;
+    maxNumber=100;
+  },[])
+
   //direction can be 'lower' or 'greater' for guessing
   function nextGuessHandler(direction) {
+    
+
     if (
       (direction === "lower" && currentGuess < userNumber) ||
       (direction === "greater" && currentGuess > userNumber)
@@ -57,7 +71,7 @@ function GameScreen({ userNumber, onGameOver }) {
       maxNumber,
       currentGuess
     );
-
+    setGuessRounds(prevGuessRounds => [newRandomNumber,...prevGuessRounds])
     setCurrentGuess(newRandomNumber);
   }
 
@@ -86,7 +100,9 @@ function GameScreen({ userNumber, onGameOver }) {
           </View>
         </View>
       </Card>
-      {/* <View>Log rounds</View> */}
+      <View>
+        {guessRounds.map(guessRound => <Text key={guessRound} >{guessRound}</Text>)}
+      </View>
     </View>
   );
 }

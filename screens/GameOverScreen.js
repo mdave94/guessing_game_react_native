@@ -2,7 +2,9 @@ import { Text, View, StyleSheet, Image } from "react-native";
 import Colors from "../constants/colors";
 import Title from "../components/ui/Title";
 import PrimaryButton from "../components/ui/PrimaryButton";
-function GamveOverScreen() {
+
+function GamveOverScreen({roundsNumber,userNumber,onStartNewGame}) {
+  
   return (
     <View style={styles.rootContainer}>
       <Title>GAME OVER </Title>
@@ -14,11 +16,11 @@ function GamveOverScreen() {
       </View>
 
       <Text style={styles.summaryText}>
-        Your phone <Text style={styles.highlight}>X</Text> round to the number{" "}
-        <Text style={styles.highlight}>Y</Text>{" "}
+        Your phone needed <Text style={styles.highlight}>{roundsNumber}</Text> round to the number
+        <Text style={styles.highlight}>{userNumber}</Text>{" "}
       </Text>
 
-      <PrimaryButton> New game </PrimaryButton>
+      <PrimaryButton onPressHandler={onStartNewGame}> New game </PrimaryButton>
     </View>
   );
 }
@@ -49,7 +51,7 @@ const styles = StyleSheet.create({
     fontFamily: "open-sans",
     fontSize: 24,
     textAlign: "center",
-    marginBottom:24,
+    marginBottom: 24,
   },
   highlight: {
     fontFamily: "open-sans-bold",
