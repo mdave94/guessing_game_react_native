@@ -14,6 +14,7 @@ import PrimaryButton from "../components/ui/PrimaryButton";
 import Title from "../components/ui/Title";
 import Colors from "../constants/colors";
 import { Ionicons } from "@expo/vector-icons";
+import GuessLogItem from "../components/game/GuessLogItem";
 
 function generateRandomNumberBetween(min, max, exclude) {
   const randomNumber = Math.floor(Math.random() * (max - min)) + min;
@@ -35,7 +36,7 @@ function GameScreen({ userNumber, onGameOver }) {
   useEffect(() => {
     console.log(userNumber, currentGuess);
     if (currentGuess === userNumber) {
-      onGameOver();
+      onGameOver(guessRounds.length);
     }
   }, [currentGuess, userNumber, onGameOver]);
 
@@ -71,6 +72,8 @@ function GameScreen({ userNumber, onGameOver }) {
     setCurrentGuess(newRandomNumber);
   }
 
+  const guessArrayLength = guessRounds.length;
+
   return (
     <View style={styles.screen}>
       <Title>Opponent's Guess</Title>
@@ -98,10 +101,15 @@ function GameScreen({ userNumber, onGameOver }) {
           </View>
         </View>
       </Card>
-      <View>
+      <View style={styles.listContainer}>
         <FlatList
           data={guessRounds}
-          renderItem={(itemData) => <Text>{itemData.item}</Text>}
+          renderItem={(itemData) => (
+            <GuessLogItem
+              roundNumber={guessArrayLength - itemData.index}
+              guess={itemData.item}
+            />
+          )}
           //using uniqe key
           keyExtractor={(item) => item}
         />
@@ -136,5 +144,9 @@ const styles = StyleSheet.create({
   },
   instuctionText: {
     marginBottom: 24,
+  },
+  listContainer: {
+    flex: 1,
+    padding: 16,
   },
 });

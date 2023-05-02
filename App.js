@@ -52,10 +52,12 @@ export default function App() {
   function startNewGameHandler() {
     setUserNumber(null);
     setGuessRounds(0);
+    setGamveOver(false);
   }
 
-  function gameOverHandler() {
+  function gameOverHandler(numberOfRounds) {
     setGamveOver(true);
+    setGuessRounds(numberOfRounds);
   }
 
   return (

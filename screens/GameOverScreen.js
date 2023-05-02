@@ -3,8 +3,7 @@ import Colors from "../constants/colors";
 import Title from "../components/ui/Title";
 import PrimaryButton from "../components/ui/PrimaryButton";
 
-function GamveOverScreen({roundsNumber,userNumber,onStartNewGame}) {
-  
+function GamveOverScreen({ roundsNumber, userNumber, onStartNewGame }) {
   return (
     <View style={styles.rootContainer}>
       <Title>GAME OVER </Title>
@@ -16,7 +15,8 @@ function GamveOverScreen({roundsNumber,userNumber,onStartNewGame}) {
       </View>
 
       <Text style={styles.summaryText}>
-        Your phone needed <Text style={styles.highlight}>{roundsNumber}</Text> round to the number
+        Your phone needed <Text style={styles.highlight}>{roundsNumber}</Text>{" "}
+        round to the number
         <Text style={styles.highlight}>{userNumber}</Text>{" "}
       </Text>
 
@@ -55,6 +55,6 @@ const styles = StyleSheet.create({
   },
   highlight: {
     fontFamily: "open-sans-bold",
-    color: Colors.yellow,
+    color: Colors.purple,
   },
 });
