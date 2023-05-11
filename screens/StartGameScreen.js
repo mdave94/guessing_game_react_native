@@ -6,6 +6,8 @@ import {
   Alert,
   useWindowDimensions,
   KeyboardAvoidingView,
+  ScrollView,
+  Dimensions,
 } from "react-native";
 import PrimaryButton from "../components/ui/PrimaryButton";
 import Title from "../components/ui/Title";
@@ -44,33 +46,37 @@ function StartGameScreen({ onPickNumber }) {
   const marginTopDistance = height < 380 ? 30 : 100;
 
   return (
-    <KeyboardAvoidingView>
-      <View style={[styles.rootContainer, { marginTop: marginTopDistance }]}>
-        <Title>Guess my Number</Title>
-        <Card>
-          <InstuctionText>Enetr your tipp</InstuctionText>
-          <TextInput
-            style={styles.numberInput}
-            maxLength={2}
-            keyboardType="number-pad"
-            autoCapitalize="none"
-            autoCorrect={false}
-            onChange={inputNumberHandler}
-            value={inputNumber}
-          />
-          <View style={styles.buttonsContainer}>
-            <View style={styles.oneButtonContainer}>
-              <PrimaryButton onPressHandler={resetNumber}>Reset</PrimaryButton>
+    <ScrollView style={styles.rootContainer}>
+      <KeyboardAvoidingView style={styles.rootContainer} behavior="position">
+        <View style={[styles.rootContainer, { marginTop: marginTopDistance }]}>
+          <Title>Guess my Number</Title>
+          <Card>
+            <InstuctionText>Enetr your tipp</InstuctionText>
+            <TextInput
+              style={styles.numberInput}
+              maxLength={2}
+              keyboardType="number-pad"
+              autoCapitalize="none"
+              autoCorrect={false}
+              onChange={inputNumberHandler}
+              value={inputNumber}
+            />
+            <View style={styles.buttonsContainer}>
+              <View style={styles.oneButtonContainer}>
+                <PrimaryButton onPressHandler={resetNumber}>
+                  Reset
+                </PrimaryButton>
+              </View>
+              <View style={styles.oneButtonContainer}>
+                <PrimaryButton onPressHandler={confirmInputHandler}>
+                  Confirm
+                </PrimaryButton>
+              </View>
             </View>
-            <View style={styles.oneButtonContainer}>
-              <PrimaryButton onPressHandler={confirmInputHandler}>
-                Confirm
-              </PrimaryButton>
-            </View>
-          </View>
-        </Card>
-      </View>
-    </KeyboardAvoidingView>
+          </Card>
+        </View>
+      </KeyboardAvoidingView>
+    </ScrollView>
   );
 }
 
@@ -82,7 +88,7 @@ const styles = StyleSheet.create({
   rootContainer: {
     flex: 1,
     //marginTop: deviceHeight < 100 ? 30 : 100,
-    alignItems: "center",
+    // alignItems: "center",
   },
   numberInput: {
     height: 50,
