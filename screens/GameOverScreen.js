@@ -71,6 +71,7 @@ const styles = StyleSheet.create({
     height: deviceWidth < 380 ? 150 : 300,
     borderRadius: deviceWidth < 380 ? 75 : 150, */
     borderWidth: 3,
+
     borderColor: Colors.yellow,
     overflow: "hidden",
     margin: 36,

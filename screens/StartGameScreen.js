@@ -47,10 +47,16 @@ function StartGameScreen({ onPickNumber }) {
   return (
     <ScrollView style={styles.rootContainer}>
       <KeyboardAvoidingView style={styles.rootContainer} behavior="position">
-        <View style={[styles.rootContainer, { marginTop: marginTopDistance }]}>
+        <View
+          style={[
+            styles.rootContainer,
+            { marginTop: marginTopDistance },
+            { alignItems: "center" },
+          ]}
+        >
           <Title>Guess my Number</Title>
           <Card>
-            <InstuctionText>Enetr your tipp</InstuctionText>
+            <InstuctionText>Enter your tipp</InstuctionText>
             <TextInput
               style={styles.numberInput}
               maxLength={2}
