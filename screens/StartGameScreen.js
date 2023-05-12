@@ -30,7 +30,6 @@ function StartGameScreen({ onPickNumber }) {
   }
 
   function confirmInputHandler() {
-    console.log(typeof inputNumber);
     const chosenNumber = parseInt(inputNumber);
 
     if (isNaN(chosenNumber) || chosenNumber <= 0 || chosenNumber > 99) {
